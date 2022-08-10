@@ -26,6 +26,7 @@ class JsonManger(QtWidgets.QMainWindow):
         self.ui.comboBox.activated.connect(self.person_selected)
         self.ui.pushButton_2.clicked.connect(self.save_data)
         self.ui.pushButton_3.clicked.connect(self.delete_person)
+        self.ui.pushButton.clicked.connect(self.add_new_person)
         self.ui.dateEdit.setDate(QtCore.QDate.currentDate())
 
     def set_header(self):
@@ -165,6 +166,10 @@ class JsonManger(QtWidgets.QMainWindow):
         self.ui.radioButton_2.setChecked(False)
 
     def delete_person(self):
+        if self.ui.comboBox.currentIndex() == -1:
+            self.clear_fields()
+            return
+
         selected_person = self.find_person()
 
         self.ui.tableWidget.removeRow(selected_person)
@@ -177,6 +182,61 @@ class JsonManger(QtWidgets.QMainWindow):
         else:
             self.clear_fields()
             return
+
+    def add_new_person(self):
+        if self.ui.lineEdit.text() == "":
+            return
+        if self.ui.comboBox.findText(self.ui.lineEdit.text()) != -1:
+            return
+
+        data = []
+
+        data.append(self.ui.lineEdit.text())
+        data.append(".".join(self.ui.dateEdit.text().split("/")))
+        data.append(self.ui.lineEdit_2.text())
+        data.append(self.ui.lineEdit_3.text())
+
+        if self.ui.radioButton.isChecked():
+            data.append("True")
+        else:
+            data.append("False")
+
+        languages = []
+
+        if self.ui.checkBox.isChecked():
+            languages.append("Python")
+        if self.ui.checkBox_2.isChecked():
+            languages.append("C++")
+        if self.ui.checkBox_3.isChecked():
+            languages.append("GoLang")
+        if self.ui.checkBox_4.isChecked():
+            languages.append("Solidity")
+
+        data.append(", ".join(languages))
+
+        self.ui.tableWidget.insertRow(self.ui.tableWidget.rowCount())
+        self.ui.tableWidget.setItem(
+            self.ui.tableWidget.rowCount() - 1, 0, QtWidgets.QTableWidgetItem(data[0])
+        )
+        self.ui.tableWidget.setItem(
+            self.ui.tableWidget.rowCount() - 1, 1, QtWidgets.QTableWidgetItem(data[1])
+        )
+        self.ui.tableWidget.setItem(
+            self.ui.tableWidget.rowCount() - 1, 2, QtWidgets.QTableWidgetItem(data[2])
+        )
+        self.ui.tableWidget.setItem(
+            self.ui.tableWidget.rowCount() - 1, 3, QtWidgets.QTableWidgetItem(data[3])
+        )
+        self.ui.tableWidget.setItem(
+            self.ui.tableWidget.rowCount() - 1, 4, QtWidgets.QTableWidgetItem(data[4])
+        )
+        self.ui.tableWidget.setItem(
+            self.ui.tableWidget.rowCount() - 1, 5, QtWidgets.QTableWidgetItem(data[5])
+        )
+        self.ui.comboBox.insertItem(self.ui.comboBox.count(), data[0])
+        self.ui.comboBox.setCurrentIndex(self.ui.comboBox.count() - 1)
+
+        print(data)
 
 
 app = QtWidgets.QApplication([])
