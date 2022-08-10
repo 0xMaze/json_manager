@@ -26,6 +26,7 @@ class JsonManger(QtWidgets.QMainWindow):
         self.ui.comboBox.activated.connect(self.person_selected)
         self.ui.pushButton_2.clicked.connect(self.save_data)
         self.ui.pushButton_3.clicked.connect(self.delete_person)
+        self.ui.dateEdit.setDate(QtCore.QDate.currentDate())
 
     def set_header(self):
         header = self.ui.tableWidget.horizontalHeader()
@@ -148,6 +149,21 @@ class JsonManger(QtWidgets.QMainWindow):
         self.ui.comboBox.setCurrentIndex(index)
         self.ui.comboBox.removeItem(index + 1)
 
+    def clear_fields(self):
+        self.ui.lineEdit.clear()
+        self.ui.lineEdit_2.clear()
+        self.ui.lineEdit_3.clear()
+
+        self.ui.checkBox.setChecked(False)
+        self.ui.checkBox_2.setChecked(False)
+        self.ui.checkBox_3.setChecked(False)
+        self.ui.checkBox_4.setChecked(False)
+
+        self.ui.dateEdit.setDate(QtCore.QDate.currentDate())
+
+        self.ui.radioButton.setChecked(False)
+        self.ui.radioButton_2.setChecked(False)
+
     def delete_person(self):
         selected_person = self.find_person()
 
@@ -156,7 +172,11 @@ class JsonManger(QtWidgets.QMainWindow):
 
         self.clear_checkboxes()
 
-        self.fill_data(self.ui.comboBox.currentIndex())
+        if self.ui.comboBox.count() > 0:
+            self.fill_data(self.ui.comboBox.currentIndex())
+        else:
+            self.clear_fields()
+            return
 
 
 app = QtWidgets.QApplication([])
