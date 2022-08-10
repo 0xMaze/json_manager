@@ -1,11 +1,9 @@
-from operator import indexOf
 import sys
-from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt6 import QtCore, QtWidgets
 from PyQt6.QtWidgets import QFileDialog
 from PyQt6.QtCore import Qt
-from sympy import Q
 from ui import Ui_mainWindow
-from json import load, dump
+from json import load
 
 
 class JsonManger(QtWidgets.QMainWindow):
