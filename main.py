@@ -118,7 +118,22 @@ class JsonManger(QtWidgets.QMainWindow):
         self.clear_checkboxes()
         self.fill_data(selected_person)
 
+    def check_for_empty_fields(self):
+        if self.ui.lineEdit.text() == "":
+            return True
+        elif self.ui.lineEdit_2.text() == "":
+            return True
+        elif self.ui.lineEdit_3.text() == "":
+            return True
+        elif self.ui.dateEdit.text() == "":
+            return True
+        else:
+            return False
+
     def save_data(self):
+        if self.check_for_empty_fields():
+            return
+
         index = self.ui.comboBox.currentIndex()
 
         self.ui.tableWidget.item(index, 0).setText(self.ui.lineEdit.text())
@@ -183,7 +198,7 @@ class JsonManger(QtWidgets.QMainWindow):
             return
 
     def add_new_person(self):
-        if self.ui.lineEdit.text() == "":
+        if self.check_for_empty_fields():
             return
         if self.ui.comboBox.findText(self.ui.lineEdit.text()) != -1:
             return
