@@ -26,6 +26,7 @@ class JsonManger(QtWidgets.QMainWindow):
         self.ui.pushButton_3.clicked.connect(self.delete_person)
         self.ui.pushButton.clicked.connect(self.add_new_person)
         self.ui.dateEdit.setDate(QtCore.QDate.currentDate())
+        self.setFixedSize(self.size())
 
     def set_header(self):
         header = self.ui.tableWidget.horizontalHeader()
