@@ -80,7 +80,7 @@ class Ui_mainWindow(object):
         self.radioButton_2.setGeometry(QRect(160, 210, 81, 23))
         self.pushButton_4 = QPushButton(self.centralwidget)
         self.pushButton_4.setObjectName(u"pushButton_4")
-        self.pushButton_4.setGeometry(QRect(420, 470, 131, 25))
+        self.pushButton_4.setGeometry(QRect(500, 470, 131, 25))
         self.label_5 = QLabel(self.centralwidget)
         self.label_5.setObjectName(u"label_5")
         self.label_5.setGeometry(QRect(20, 140, 71, 21))
@@ -93,9 +93,6 @@ class Ui_mainWindow(object):
         self.lineEdit_3 = QLineEdit(self.centralwidget)
         self.lineEdit_3.setObjectName(u"lineEdit_3")
         self.lineEdit_3.setGeometry(QRect(90, 170, 141, 25))
-        self.pushButton_5 = QPushButton(self.centralwidget)
-        self.pushButton_5.setObjectName(u"pushButton_5")
-        self.pushButton_5.setGeometry(QRect(570, 470, 131, 25))
         mainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QStatusBar(mainWindow)
         self.statusbar.setObjectName(u"statusbar")
@@ -128,6 +125,5 @@ class Ui_mainWindow(object):
         self.label_6.setText(QCoreApplication.translate("mainWindow", u"weight", None))
         self.lineEdit_2.setText("")
         self.lineEdit_3.setText("")
-        self.pushButton_5.setText(QCoreApplication.translate("mainWindow", u"SAVE TO FILE", None))
     # retranslateUi
 

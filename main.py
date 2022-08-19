@@ -26,7 +26,6 @@ class JsonManger(QtWidgets.QMainWindow):
         self.ui.pushButton_2.clicked.connect(self.save_data)
         self.ui.pushButton_3.clicked.connect(self.delete_person)
         self.ui.pushButton.clicked.connect(self.add_new_person)
-        self.ui.pushButton_5.clicked.connect(self.save_to_json)
         self.ui.dateEdit.setDate(QtCore.QDate.currentDate())
         self.setFixedSize(self.size())
 
@@ -73,7 +72,6 @@ class JsonManger(QtWidgets.QMainWindow):
             row = {}
             for j in range(self.ui.tableWidget.columnCount()):
                 if self.ui.tableWidget.item(i, j).text().isdigit():
-                    print(type(self.ui.tableWidget.item(i, j).text()))
                     row[self.ui.tableWidget.horizontalHeaderItem(j).text()] = int(
                         self.ui.tableWidget.item(i, j).text()
                     )
@@ -99,8 +97,6 @@ class JsonManger(QtWidgets.QMainWindow):
                     ] = self.ui.tableWidget.item(i, j).text()
 
             data.append(row)
-
-        print(data)
 
         with open("data.json", "w") as f:
             dump(data, f)
