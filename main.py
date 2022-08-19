@@ -270,24 +270,14 @@ class JsonManger(QtWidgets.QMainWindow):
         data.append(", ".join(languages))
 
         self.ui.tableWidget.insertRow(self.ui.tableWidget.rowCount())
-        self.ui.tableWidget.setItem(
-            self.ui.tableWidget.rowCount() - 1, 0, QtWidgets.QTableWidgetItem(data[0])
-        )
-        self.ui.tableWidget.setItem(
-            self.ui.tableWidget.rowCount() - 1, 1, QtWidgets.QTableWidgetItem(data[1])
-        )
-        self.ui.tableWidget.setItem(
-            self.ui.tableWidget.rowCount() - 1, 2, QtWidgets.QTableWidgetItem(data[2])
-        )
-        self.ui.tableWidget.setItem(
-            self.ui.tableWidget.rowCount() - 1, 3, QtWidgets.QTableWidgetItem(data[3])
-        )
-        self.ui.tableWidget.setItem(
-            self.ui.tableWidget.rowCount() - 1, 4, QtWidgets.QTableWidgetItem(data[4])
-        )
-        self.ui.tableWidget.setItem(
-            self.ui.tableWidget.rowCount() - 1, 5, QtWidgets.QTableWidgetItem(data[5])
-        )
+
+        for i in range(len(data)):
+            self.ui.tableWidget.setItem(
+                self.ui.tableWidget.rowCount() - 1,
+                i,
+                QtWidgets.QTableWidgetItem(data[i]),
+            )
+
         self.ui.comboBox.insertItem(self.ui.comboBox.count(), data[0])
         self.ui.comboBox.setCurrentIndex(self.ui.comboBox.count() - 1)
 
