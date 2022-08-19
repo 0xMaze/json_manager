@@ -293,8 +293,6 @@ class JsonManger(QtWidgets.QMainWindow):
 
         self.save_to_json()
 
-        print(data)
-
 
 app = QtWidgets.QApplication([])
 application = JsonManger()
