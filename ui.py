@@ -70,7 +70,7 @@ class Ui_mainWindow(object):
         self.radioButton_2.setGeometry(QtCore.QRect(160, 210, 81, 23))
         self.radioButton_2.setObjectName("radioButton_2")
         self.pushButton_4 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_4.setGeometry(QtCore.QRect(480, 470, 131, 25))
+        self.pushButton_4.setGeometry(QtCore.QRect(420, 470, 131, 25))
         self.pushButton_4.setObjectName("pushButton_4")
         self.label_5 = QtWidgets.QLabel(self.centralwidget)
         self.label_5.setGeometry(QtCore.QRect(20, 140, 71, 21))
@@ -86,6 +86,9 @@ class Ui_mainWindow(object):
         self.lineEdit_3.setGeometry(QtCore.QRect(90, 170, 141, 25))
         self.lineEdit_3.setText("")
         self.lineEdit_3.setObjectName("lineEdit_3")
+        self.pushButton_5 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_5.setGeometry(QtCore.QRect(570, 470, 131, 25))
+        self.pushButton_5.setObjectName("pushButton_5")
         mainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(mainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -114,6 +117,7 @@ class Ui_mainWindow(object):
         self.pushButton_4.setText(_translate("mainWindow", "LOAD FROM FILE"))
         self.label_5.setText(_translate("mainWindow", "height"))
         self.label_6.setText(_translate("mainWindow", "weight"))
+        self.pushButton_5.setText(_translate("mainWindow", "SAVE TO FILE"))
 
 
 if __name__ == "__main__":

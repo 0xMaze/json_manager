@@ -1,9 +1,10 @@
 import sys
+import re
 from PyQt6 import QtCore, QtWidgets
 from PyQt6.QtWidgets import QFileDialog
 from PyQt6.QtCore import Qt
 from ui import Ui_mainWindow
-from json import load
+from json import load, dump
 
 
 class JsonManger(QtWidgets.QMainWindow):
@@ -25,6 +26,7 @@ class JsonManger(QtWidgets.QMainWindow):
         self.ui.pushButton_2.clicked.connect(self.save_data)
         self.ui.pushButton_3.clicked.connect(self.delete_person)
         self.ui.pushButton.clicked.connect(self.add_new_person)
+        self.ui.pushButton_5.clicked.connect(self.save_to_json)
         self.ui.dateEdit.setDate(QtCore.QDate.currentDate())
         self.setFixedSize(self.size())
 
@@ -63,6 +65,47 @@ class JsonManger(QtWidgets.QMainWindow):
             self.ui.comboBox.addItem(data[i]["name"])
 
         self.fill_data(self.ui.comboBox.currentIndex())
+
+    def save_to_json(self):
+        data = []
+
+        for i in range(self.ui.tableWidget.rowCount()):
+            row = {}
+            for j in range(self.ui.tableWidget.columnCount()):
+                if self.ui.tableWidget.item(i, j).text().isdigit():
+                    print(type(self.ui.tableWidget.item(i, j).text()))
+                    row[self.ui.tableWidget.horizontalHeaderItem(j).text()] = int(
+                        self.ui.tableWidget.item(i, j).text()
+                    )
+                elif re.match(
+                    r"^-?\d+(?:\.\d+)$", self.ui.tableWidget.item(i, j).text()
+                ):
+                    row[self.ui.tableWidget.horizontalHeaderItem(j).text()] = float(
+                        self.ui.tableWidget.item(i, j).text()
+                    )
+                elif self.ui.tableWidget.horizontalHeaderItem(j).text() == "languages":
+                    row[self.ui.tableWidget.horizontalHeaderItem(j).text()] = (
+                        self.ui.tableWidget.item(i, j).text().split(", ")
+                    )
+                elif self.ui.tableWidget.item(i, j).text() == "True":
+                    row[self.ui.tableWidget.horizontalHeaderItem(j).text()] = True
+
+                elif self.ui.tableWidget.item(i, j).text() == "False":
+                    row[self.ui.tableWidget.horizontalHeaderItem(j).text()] = False
+
+                else:
+                    row[
+                        self.ui.tableWidget.horizontalHeaderItem(j).text()
+                    ] = self.ui.tableWidget.item(i, j).text()
+
+            data.append(row)
+
+        print(data)
+
+        with open("data.json", "w") as f:
+            dump(data, f)
+
+        return data
 
     def find_person(self):
         name = self.ui.comboBox.currentText()
@@ -163,6 +206,7 @@ class JsonManger(QtWidgets.QMainWindow):
         self.ui.comboBox.insertItem(index, self.ui.lineEdit.text())
         self.ui.comboBox.setCurrentIndex(index)
         self.ui.comboBox.removeItem(index + 1)
+        self.save_to_json()
 
     def clear_fields(self):
         self.ui.lineEdit.clear()
@@ -190,6 +234,7 @@ class JsonManger(QtWidgets.QMainWindow):
         self.ui.comboBox.removeItem(selected_person)
 
         self.clear_checkboxes()
+        self.save_to_json()
 
         if self.ui.comboBox.count() > 0:
             self.fill_data(self.ui.comboBox.currentIndex())
@@ -249,6 +294,8 @@ class JsonManger(QtWidgets.QMainWindow):
         )
         self.ui.comboBox.insertItem(self.ui.comboBox.count(), data[0])
         self.ui.comboBox.setCurrentIndex(self.ui.comboBox.count() - 1)
+
+        self.save_to_json()
 
         print(data)
 

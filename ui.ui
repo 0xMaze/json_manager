@@ -232,7 +232,7 @@
    <widget class="QPushButton" name="pushButton_4">
     <property name="geometry">
      <rect>
-      <x>480</x>
+      <x>420</x>
       <y>470</y>
       <width>131</width>
       <height>25</height>
@@ -292,6 +292,19 @@
     </property>
     <property name="text">
      <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_5">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>470</y>
+      <width>131</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>SAVE TO FILE</string>
     </property>
    </widget>
   </widget>
